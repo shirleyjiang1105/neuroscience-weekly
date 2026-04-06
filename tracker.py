@@ -39,8 +39,8 @@ JOURNALS = {
 # 精简为3个核心关键词（可按需修改）
 KEYWORDS = [
     "Alzheimer",  # 阿尔茨海默病
-    "fMRI",       # 功能磁共振
-    "PET"     # 突触
+    "brain",       # 功能磁共振
+    "neuroscience"     # 突触
 ]
 
 DAYS = 7
