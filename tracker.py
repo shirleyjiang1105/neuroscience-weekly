@@ -6,7 +6,7 @@ import requests
 import json
 import re
 
-# ===================== 核心配置 =====================
+# ===================== 核心配置（3个核心关键词）=====================
 # 25本神经科学Q1顶刊（RSS全覆盖）
 JOURNALS = {
     "Nature Reviews Neuroscience": "https://www.nature.com/nrn/rss/current.xml",
@@ -36,11 +36,11 @@ JOURNALS = {
     "Brain Stimulation": "https://www.sciencedirect.com/feeds?jid=1935861X"
 }
 
-# 10个核心关键词
+# 精简为3个核心关键词（可按需修改）
 KEYWORDS = [
-    "Alzheimer", "neurodegeneration", "neuroinflammation",
-    "fMRI", "synapse", "plasticity", "microglia",
-    "memory", "cognition", "depression"
+    "Alzheimer",  # 阿尔茨海默病
+    "fMRI",       # 功能磁共振
+    "PET"     # 突触
 ]
 
 DAYS = 7
@@ -188,7 +188,7 @@ send_feishu_notification()
 
 # 更新README
 readme_content = "# 🧠 神经科学顶刊每周自动追踪\n\n"
-readme_content += "✅ 25本神经科学Q1顶刊 | 🕒 每周一自动更新 | 🔍 关键词过滤 | 📱 飞书实时推送\n\n"
+readme_content += "✅ 25本神经科学Q1顶刊 | 🕒 每周一自动更新 | 🔍 3个核心关键词过滤 | 📱 飞书实时推送\n\n"
 readme_content += "## 🔧 核心配置\n"
 readme_content += "### 跟踪期刊\n"
 for j in JOURNALS.keys():
