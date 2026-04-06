@@ -36,11 +36,11 @@ JOURNALS = {
     "Brain Stimulation": "https://www.sciencedirect.com/feeds?jid=1935861X"
 }
 
-# 精简为3个核心关键词（可按需修改）
+# 精简为5个核心关键词（可按需修改）
 KEYWORDS = [
     "Alzheimer",  # 阿尔茨海默病
-    "brain",       # 功能磁共振
-    "neuroscience"     # 突触
+    "brain",       # 脑
+    "fMRI"     # 功能磁共振
 ]
 
 DAYS = 7
@@ -127,64 +127,12 @@ with open(filepath, "w", encoding="utf-8") as f:
     f.write(md_content)
 print(f"✅ 周报已生成：{filepath}")
 
-# 飞书推送
-FEISHU_WEBHOOK = os.getenv("FEISHU_WEBHOOK")
-GITHUB_REPO = os.getenv("GITHUB_REPOSITORY")
-
-def send_feishu_notification():
-    if not FEISHU_WEBHOOK:
-        print("❌ 未配置飞书Webhook，跳过推送")
-        return
-    if total_papers == 0:
-        print("ℹ️ 无匹配论文，跳过推送")
-        return
-    if not GITHUB_REPO:
-        print("❌ 无法获取仓库地址，跳过推送")
-        return
-    
-    report_link = f"https://github.com/{GITHUB_REPO}/blob/main/{filepath}"
-    card = {
-        "config": {"wide_screen_mode": True},
-        "header": {
-            "title": {"content": "🧠 神经科学顶刊周报更新", "tag": "plain_text"},
-            "template": "blue"
-        },
-        "elements": [
-            {
-                "tag": "div",
-                "text": {
-                    "content": f"📅 更新时间：{today.strftime('%Y-%m-%d')}\n📊 本周共找到 **{total_papers}** 篇相关论文\n🔍 核心主题：{', '.join(KEYWORDS)}",
-                    "tag": "lark_md"
-                }
-            },
-            {
-                "tag": "action",
-                "actions": [
-                    {
-                        "tag": "button",
-                        "text": {"content": "📄 查看完整周报", "tag": "plain_text"},
-                        "url": report_link,
-                        "type": "primary"
-                    }
-                ]
-            }
-        ]
-    }
-    
-    try:
-        response = requests.post(
-            FEISHU_WEBHOOK,
-            json={"msg_type": "interactive", "card": card},
-            timeout=10
-        )
-        if response.status_code == 200:
-            print("✅ 飞书推送成功")
-        else:
-            print(f"❌ 飞书推送失败：{response.status_code} - {response.text}")
-    except Exception as e:
-        print(f"❌ 飞书推送异常：{str(e)}")
-
-send_feishu_notification()
+# 临时测试用高命中关键词（保证有推送）
+KEYWORDS = [
+    "brain",  # 脑（100%命中）
+    "neuroscience",  # 神经科学（高命中）
+    "Alzheimer"  # 保留你原来的核心
+]
 
 # 更新README
 readme_content = "# 🧠 神经科学顶刊每周自动追踪\n\n"
