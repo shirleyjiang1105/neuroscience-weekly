@@ -9,18 +9,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # 关键：给机器人写入权限，解决exit code 128
+      contents: write  # 给机器人写入权限，解决push报错
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5  # 升级到v5，解决Node.js警告
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v6  # 升级到v6，兼容最新环境
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
-          cache: 'pip'
+          # 关键：关闭缓存，彻底解决requirements.txt报错
+          cache: 'no'
 
       - name: Install dependencies
         run: |
@@ -28,7 +29,14 @@ jobs:
           pip install feedparser requests beautifulsoup4
 
       - name: Run tracker script
-        run: python tracker.py
+        run: |
+          # 检查文件存在，避免空跑
+          if [ -f "tracker.py" ]; then
+            python tracker.py
+          else
+            echo "❌ tracker.py not found in root directory!"
+            exit 1
+          fi
         env:
           FEISHU_WEBHOOK: ${{ secrets.FEISHU_WEBHOOK }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -38,6 +46,7 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          # 无变更时不报错，避免exit code 1
+          # 无变更时不报错
           git diff --quiet && git diff --staged --quiet || git commit -m "Auto-update weekly paper list $(date +'%Y-%m-%d')"
+          git push || git commit -m "Auto-update weekly paper list $(date +'%Y-%m-%d')"
           git push
