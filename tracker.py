@@ -9,31 +9,13 @@ import re
 # ===================== 核心配置（3个核心关键词）=====================
 # 25本神经科学Q1顶刊（RSS全覆盖）
 JOURNALS = {
-    "Nature Reviews Neuroscience": "https://www.nature.com/nrn/rss/current.xml",
-    "Nature Neuroscience": "https://www.nature.com/nn/rss/current.xml",
-    "Neuron": "https://www.cell.com/neuron/rss",
-    "Brain": "https://academic.oup.com/brain/rss.xml",
-    "Molecular Psychiatry": "https://www.nature.com/mp/rss/current.xml",
-    "Acta Neuropathologica": "https://link.springer.com/search.rss?f-journal=Acta+Neuropathologica",
-    "Acta Neuropathologica Communications": "https://actaneurocomms.biomedcentral.com/articles/rss",
-    "Alzheimer's & Dementia": "https://alz-journal.org/rss/published.xml",
-    "NeuroImage": "https://www.sciencedirect.com/feeds?jid=10538119",
-    "Cerebral Cortex": "https://academic.oup.com/cercor/rss.xml",
-    "Acta Physiologica": "https://onlinelibrary.wiley.com/feed/14698994/latest",
-    "Journal of Neuroinflammation": "https://jneuroinflammation.biomedcentral.com/articles/rss",
-    "Neurobiology of Aging": "https://www.sciencedirect.com/feeds?jid=01974580",
-    "Human Brain Mapping": "https://onlinelibrary.wiley.com/feed/10970193/latest",
-    "Neurobiology of Disease": "https://www.sciencedirect.com/feeds?jid=09699961",
-    "Glia": "https://onlinelibrary.wiley.com/feed/08941491/latest",
-    "Pain": "https://www.sciencedirect.com/feeds?jid=03043959",
-    "Cortex": "https://www.sciencedirect.com/feeds?jid=00109452",
-    "Neuropsychopharmacology": "https://www.nature.com/npp/rss/current.xml",
-    "Journal of Neuroscience": "https://www.jneurosci.org/rss/current.xml",
-    "eNeuro": "https://www.eneuro.org/rss/current.xml",
-    "NeuroMolecular Medicine": "https://link.springer.com/search.rss?f-journal=12017",
+    "Nature Neuroscience": "https://www.nature.com/nn/rss/latest.xml",
+    "Nature Reviews Neuroscience": "https://www.nature.com/nrn/rss/latest.xml",
+    "Neuron": "https://cell.com/neuron/rss",
+    "eNeuro": "https://www.eneuro.org/rss/latest.xml",
+    "Journal of Neuroscience": "https://www.jneurosci.org/rss/latest.xml",
     "Frontiers in Neuroscience": "https://www.frontiersin.org/rss/neuroscience.xml",
-    "Neurology": "https://n.neurology.org/rss/current.xml",
-    "Brain Stimulation": "https://www.sciencedirect.com/feeds?jid=1935861X"
+    "NeuroImage": "https://www.sciencedirect.com/rss?jid=10538119",
 }
 
 # 精简为5个核心关键词（可按需修改）
